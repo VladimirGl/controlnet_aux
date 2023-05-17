@@ -75,7 +75,7 @@ class OpenposeDetector:
 
         return cls(body_estimation, hand_estimation, face_estimation)
 
-    def __call__(self, input_image, detect_resolution=512, image_resolution=512, hand_and_face=False, return_pil=True):
+    def __call__(self, input_image, detect_resolution=512, image_resolution=512, hand_and_face=False, return_pil=True, return_pose=False):
         # hand = False
         if not isinstance(input_image, np.ndarray):
             input_image = np.array(input_image, dtype=np.uint8)
@@ -126,4 +126,6 @@ class OpenposeDetector:
         if return_pil:
             detected_map = Image.fromarray(detected_map)
 
+        if return_pose:
+            return detected_map, pose
         return detected_map
